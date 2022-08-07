@@ -23,7 +23,9 @@ public class MontarCodigoQrcode {
 		return "00020126360014BR.GOV.BCB.PIX01" 
 				+ chavePixLength 
 				+ chaveQrcode.getChavepix()
-				+ "52040000530398654";			
+				+ "52040000530398654"
+				+ valorLength
+				+ chaveQrcode.getValor().toString();			
 	}
 
 }
