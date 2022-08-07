@@ -20,13 +20,10 @@ public class MontarCodigoQrcode {
 		String chavePixLength = StringUtils.leftPad(String.valueOf(chaveQrcode.getChavepix().length()), 2) ;
 		String valorLength = StringUtils.leftPad(chaveQrcode.getValor().toString(), 2);
 		
-		String codigoQrcode = "00020126360014BR.GOV.BCB.PIX01" 
+		return "00020126360014BR.GOV.BCB.PIX01" 
 				+ chavePixLength 
 				+ chaveQrcode.getChavepix()
-				+ "52040000530398654";
-		
-		
-		return codigoQrcode;
+				+ "52040000530398654";			
 	}
 
 }
