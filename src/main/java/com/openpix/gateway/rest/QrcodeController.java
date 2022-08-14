@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.zxing.WriterException;
 import com.openpix.usecases.GerarQrcode;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.RequiredArgsConstructor;
 
 @RestController
