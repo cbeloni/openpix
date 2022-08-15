@@ -19,20 +19,21 @@ import com.openpix.domains.ChaveQrcode;
 @ExtendWith(MockitoExtension.class)
 public class MontarCodigoQrcodeTest {
 	
-	private final String CODIGO_QRCODE_ESPERADO = "00020126390014BR.GOV.BCB.PIX0117cbeloni@gmail.com52040000530398654049.995802BR5911Caue Beloni6011Santo Andre62180514pagamentoconta630475F8";
-	private final String CODIGO_QRCODE_ESPERADO_SEM_VALOR = "00020126390014BR.GOV.BCB.PIX0117cbeloni@gmail.com5204000053039865802BR5911caue beloni6011santo andre62180514pagamentoconta630411A0";
+	private final String CODIGO_QRCODE_ESPERADO = "00020126390014BR.GOV.BCB.PIX0117CBELONI@GMAIL.COM52040000530398654049.995802BR5911Caue Beloni6011Santo Andre62180514pagamentoconta63040787";
+	private final String CODIGO_QRCODE_ESPERADO_SEM_VALOR = "00020126390014BR.GOV.BCB.PIX0117CBELONI@GMAIL.COM5204000053039865802BR5911Caue Beloni6011Santo Andre62180514pagamentoconta6304F916";
 	@InjectMocks
 	private MontarCodigoQrcode montarCodigoQrcode;
 	@Spy
 	private ValidarChaveQrcode validarChaveQrcode;
 	private ChaveQrcode chaveQrCodeSucess;
 	private ChaveQrcode chaveQrCodeValueMax;
+	private ChaveQrcode chaveQrCodeSemValor;
 	
 	@BeforeEach
 	public void init() {
 		chaveQrCodeSucess = ChaveQrcode
 				.builder()
-				.chavepix("cbeloni@gmail.com")
+				.chavepix("CBELONI@GMAIL.COM")
 				.nomeBeneficiario("Caue Beloni")
 				.cidadeBeneficiario("Santo Andre")
 				.valor(new BigDecimal("9.99"))
@@ -40,10 +41,18 @@ public class MontarCodigoQrcodeTest {
 		
 		chaveQrCodeValueMax = ChaveQrcode
 				.builder()
-				.chavepix("cbeloni@gmail.com")
+				.chavepix("CBELONI@GMAIL.COM")
 				.nomeBeneficiario("Caue Beloni")
 				.cidadeBeneficiario("Santo Andre")
 				.valor(new BigDecimal("9999.99"))
+				.codigo("pagamentoconta").build();
+		
+		chaveQrCodeSemValor = ChaveQrcode
+				.builder()
+				.chavepix("CBELONI@GMAIL.COM")
+				.nomeBeneficiario("Caue Beloni")
+				.cidadeBeneficiario("Santo Andre")
+				.valor(new BigDecimal("0"))
 				.codigo("pagamentoconta").build();
 	}
 	
@@ -55,7 +64,7 @@ public class MontarCodigoQrcodeTest {
 	
 	@Test
 	public void DeveMontarCodigoQrCodeSemValor() {
-		String codigoQrcode = montarCodigoQrcode.execute(this.chaveQrCodeSucess);		
+		String codigoQrcode = montarCodigoQrcode.execute(this.chaveQrCodeSemValor);		
 		assertEquals(CODIGO_QRCODE_ESPERADO_SEM_VALOR, codigoQrcode);
 	}
 	

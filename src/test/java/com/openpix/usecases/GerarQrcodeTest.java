@@ -14,7 +14,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-import com.openpix.usecases.GerarQrcode;
 
 @ExtendWith(MockitoExtension.class)
 public class GerarQrcodeTest {
