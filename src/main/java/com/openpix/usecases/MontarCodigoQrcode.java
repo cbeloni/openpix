@@ -30,17 +30,17 @@ public class MontarCodigoQrcode {
 				+ "0014BR.GOV.BCB.PIX01" 
 				+ chavePixLength 
 				+ chaveQrcode.getChavepix()
-				+ "52040000530398654"
-				+ (valorLength != "00" ? valorLength : "")
-				+ (valorLength != "00" ? chaveQrcode.getValor().toString() : "")
-				+ "5802BR59"
-				+ beneficiarioLength
+				+ "520400005303986"
+				+ (chaveQrcode.getValor().longValue() > 0L ? "54"+valorLength : "")
+				+ (chaveQrcode.getValor().longValue() > 0L ? chaveQrcode.getValor().toString() : "")
+				+ "5802BR"
+				+ "59" + beneficiarioLength
 				+ chaveQrcode.getNomeBeneficiario()
 				+ "60"
 				+ cidadeLength
 				+ chaveQrcode.getCidadeBeneficiario()
-				+ "621805"
-				+ codigoLength
+				+ "6218"
+				+ "05" + codigoLength
 				+ chaveQrcode.getCodigo()
 				+ "6304";
 		return  chave + Crc16.TO_PIX_HEX(chave);
