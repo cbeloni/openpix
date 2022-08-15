@@ -11,14 +11,21 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
+import com.openpix.domains.ChaveQrcode;
 import com.openpix.util.ImageUtils;
 
-@Component
-public class GerarQrcode {
+import lombok.RequiredArgsConstructor;
 
-	public String execute(String data, String charset, int height, int width)
+@Component
+@RequiredArgsConstructor
+public class GerarQrcode {
+	
+	private final MontarCodigoQrcode montarCodigoQrcode;
+
+	public String execute(ChaveQrcode chaveQrcode, String charset, int height, int width)
 			throws WriterException, IOException {
-		BitMatrix matrix = new MultiFormatWriter().encode(new String(data.getBytes(charset), charset),
+		String codigoQrcode = montarCodigoQrcode.execute(chaveQrcode);
+		BitMatrix matrix = new MultiFormatWriter().encode(new String(codigoQrcode.getBytes(charset), charset),
 				BarcodeFormat.QR_CODE, width, height);
 
 		BufferedImage qrcode = MatrixToImageWriter.toBufferedImage(matrix);
