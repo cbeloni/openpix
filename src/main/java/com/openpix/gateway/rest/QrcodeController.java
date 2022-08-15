@@ -36,7 +36,7 @@ public class QrcodeController {
 		
 		ChaveQrcode chaveQrcode = ChaveQrcode
 				.builder()
-				.chavepix(chavePix)
+				.chavepix(chavePix.toUpperCase())
 				.nomeBeneficiario(nomeBeneficiario)
 				.cidadeBeneficiario("Santo Andre")
 				.valor(valor)
