@@ -3,12 +3,14 @@ package com.openpix.gateway.rest;
 import java.math.BigDecimal;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class QrcodeRequest {
 	
 	private String chavepix;
