@@ -41,12 +41,16 @@
 		    </div>
 		     <div class="form-group text-center">
 		     	<span th:if="${qrcodeRequest.chavepix  != null}">
-		    		<img th:src="@{${'/qrcode?chavePix=' + qrcodeRequest.chavepix + '&nomeBeneficiario=' + qrcodeRequest.nomeBeneficiario + '&valor=' + qrcodeRequest.valor + '&codigo=' + qrcodeRequest.codigo}}" alt="QRCODE PIX"/>
+		    		<img th:src="@{${'/qrcode?chavePix=' + qrcodeRequest.chavepix + '&nomeBeneficiario=' + 
+		    		qrcodeRequest.nomeBeneficiario + '&valor=' + qrcodeRequest.valor + 
+		    		'&codigo=' + qrcodeRequest.codigo}}" alt="QRCODE PIX"/>
 		    	</span>		    	
 		    </div>
-		    <!--<div class="form-group row" >
-				<input type="text" th:if="${qrcodeRequest.chavepix  != null}" class="form-control col-sm-12" th:value="@{${'http://177.93.128.55/qrcode/chave?chavePix=' + qrcodeRequest.chavepix + '&nomeBeneficiario=' + qrcodeRequest.nomeBeneficiario + '&valor=' + qrcodeRequest.valor + '&codigo=' + qrcodeRequest.codigo}}"/>            
-		    </div>  -->		    
+		    <div class="form-group row" >
+		    	<span class="form-control col-sm-1 invisible" ></span>
+				<input  class="form-control col-sm-10 text-center" type="text" th:if="${qrcodeRequest.chavepix  != null}" 
+				th:value="${codigoQrcode}"/>            
+		    </div>  		    
 		</form>
     	</div>
 		

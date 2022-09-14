@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.openpix.domains.ChaveQrcode;
 import com.openpix.gateway.rest.QrcodeRequest;
 import com.openpix.usecases.GerarQrcode;
+import com.openpix.usecases.MontarCodigoQrcode;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -27,6 +28,7 @@ import lombok.extern.log4j.Log4j2;
 public class QrcodeViewController {
 	
 	private final GerarQrcode gerarQrcode;
+	private final MontarCodigoQrcode montarCodigoQrcode;
 	
 	@GetMapping
 	public String viewTodos(Model model){
@@ -39,7 +41,11 @@ public class QrcodeViewController {
 	@PostMapping("/")
 	public String salvar(@ModelAttribute QrcodeRequest qrcode, Model model){				
 		log.info("qrcode: " + qrcode);
+		ChaveQrcode chaveQrcode = ChaveQrcode.toDomain(qrcode);
+		String codigoQrcode = montarCodigoQrcode.execute(chaveQrcode);
+		
 		model.addAttribute("qrcodeRequest", qrcode);
+		model.addAttribute("codigoQrcode", codigoQrcode);
 		return "index";
 	}
 
