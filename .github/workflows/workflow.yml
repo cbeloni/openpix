@@ -1,0 +1,14 @@
+name: Deploy production
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  meu-job:
+    runs-on: ubuntu-latest
+    steps:
+	- name: Run Remote Script
+	      run: ssh ubuntu@177.93.128.55 'bash -s' < /home/ubuntu/api/deploy-openpix/start-server.sh
+	      env:
+		SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
