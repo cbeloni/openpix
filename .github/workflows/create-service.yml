@@ -30,7 +30,7 @@ jobs:
             WorkingDirectory=/home/ubuntu/api/deploy-openpix/openpix/target
 
             #path to executable. 
-            ExecStart=java -jar /home/ubuntu/api/deploy-openpix/openpix/target/openpix-0.0.1-SNAPSHOT.jar
+            ExecStart=java -jar openpix-0.0.1-SNAPSHOT.jar
 
             SuccessExitStatus=143
             TimeoutStopSec=10
