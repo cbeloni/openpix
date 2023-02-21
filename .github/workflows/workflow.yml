@@ -21,4 +21,17 @@ jobs:
           script_stop: true
           script: | 
             cd /home/ubuntu/api/deploy-openpix/
-            ./start-server.sh
+            [ -d openpix ] && rm -rf openpix
+            git clone https://${{ secrets.GIT_USER }}:${{ secrets.GIT_TOKEN} }@github.com/cbeloni/openpix.git
+            cd openpix 
+            chmod +x mvnw
+            ./mvnw package
+            cd ..
+            PIDS=$(ps -ef | grep openpix-0.0.1-SNAPSHOT.jar | awk '{print $2}')
+            echo "Matando processo com os PIDs $PIDS"
+            echo $PIDS | tr ' ' '\n' | xargs sudo kill
+            echo "Iniciando aplicação..."
+            chmod +x openpix/target/openpix-0.0.1-SNAPSHOT.jar
+            sudo java -jar -Dserver.port=80 openpix/target/openpix-0.0.1-SNAPSHOT.jar > logs.txt &
+            echo "Aplicação iniciada com sucesso"
+            
