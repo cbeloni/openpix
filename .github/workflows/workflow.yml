@@ -18,4 +18,4 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           command_timeout: 1m
-          script: sh /home/ubuntu/api/deploy-openpix/start-server.sh 
+          script: sh /home/ubuntu/api/deploy-openpix/start-server.sh &
