@@ -19,7 +19,8 @@ jobs:
           command_timeout: 2m
           script: |  
             sudo su
-            cat <<EOF > /etc/systemd/system/openpix.service
+            cd /home/ubuntu/api/deploy-openpix/
+            cat <<EOF > openpix.service
             [Unit]
             Description=Openpix Service
             [Service]
@@ -41,5 +42,7 @@ jobs:
             [Install]
             WantedBy=multi-user.target
             EOF
+            sudo cp openpix.service /etc/systemd/system/openpix.service
             sudo systemctl daemon-reload
             sudo systemctl enable openpix.service
+            echo "servico criado com sucesso!"
