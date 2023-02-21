@@ -24,9 +24,8 @@ jobs:
             git clone https://${{ secrets.GIT_USER }}:${{ secrets.GIT_TOKEN }}@github.com/cbeloni/openpix.git
             cd openpix 
             chmod +x mvnw
-            ./mvnw package -DskipTests
-            cd ..               
-            chmod +x openpix/target/openpix-0.0.1-SNAPSHOT.jar                        
+            ./mvnw package -DskipTests       
+            chmod +x target/openpix-0.0.1-SNAPSHOT.jar
       - name: starting app
         uses: appleboy/ssh-action@v0.1.7
         with:
