@@ -20,7 +20,6 @@ jobs:
           command_timeout: 2m
           script: |        
             PIDS=$(jps | grep openpix-0.0.1-SNAPSHOT.jar | awk '{print $1}')
-            mkdir -p /home/ubuntu/api/deploy-openpix &&
             cd /home/ubuntu/api/deploy-openpix/
             [ -d openpix ] && rm -rf openpix
             git clone https://${{ secrets.GIT_USER }}:${{ secrets.GIT_TOKEN }}@github.com/cbeloni/openpix.git
@@ -28,10 +27,10 @@ jobs:
             chmod +x mvnw
             ./mvnw package -DskipTests
             cd ..               
-            chmod +x openpix/target/openpix-0.0.1-SNAPSHOT.jar 
-            for pid in $PIDS; do echo "Matando processo com PID $pid" & done;
-            for pid in $PIDS; do sudo kill -9 $pid " & done;
-            java -jar openpix/target/openpix-0.0.1-SNAPSHOT.jar > logs.txt && 
+            chmod +x openpix/target/openpix-0.0.1-SNAPSHOT.jar            
+            for pid in $PIDS; do echo "Matando processo com PID $pid"; done;
+            for pid in $PIDS; kill -9 $pid; done;
+            java -jar openpix/target/openpix-0.0.1-SNAPSHOT.jar > logs.txt &        
             echo "Aplicação iniciada com sucesso"
             exit 0
             true
