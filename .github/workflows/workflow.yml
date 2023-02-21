@@ -17,6 +17,4 @@ jobs:
           username: ubuntu
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
-          script: |
-            /home/ubuntu/api/deploy-openpix/start-server.sh &
-            exit 0
+          script: bash /home/ubuntu/api/deploy-openpix/start-server.sh
