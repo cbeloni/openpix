@@ -11,7 +11,7 @@ jobs:
       name: open-pix
     steps:
       - name: executing remote ssh commands using ssh key
-        uses: appleboy/ssh-action@v0.1.7
+        uses: actions/checkout@v1
         with:
           host: 177.93.128.55
           username: ubuntu
@@ -20,5 +20,4 @@ jobs:
           command_timeout: 1m
           script: | 
             cd /home/ubuntu/api/deploy-openpix/
-            ./start-server.sh &
-            logout
+            ./start-server.sh
