@@ -39,7 +39,7 @@ jobs:
             script: |        
               for pid in $PIDS; do echo "Matando processo com PID $pid"; done;
               for pid in $PIDS; do sudo kill -9 $pid & done;  
-              nohup java -jar /home/ubuntu/api/deploy-openpix/openpix/target/openpix-0.0.1-SNAPSHOT.jar & > logs.txt &&
+              java -jar /home/ubuntu/api/deploy-openpix/openpix/target/openpix-0.0.1-SNAPSHOT.jar &&&
               echo "Aplicação iniciada com sucesso"
               exit 0
               true           
