@@ -29,6 +29,7 @@ jobs:
             chmod +x openpix/target/openpix-0.0.1-SNAPSHOT.jar                        
       - name: deploying app
         uses: appleboy/ssh-action@v0.1.7
+        if: always() || failure()
         with:
             host: 177.93.128.55
             username: ubuntu
@@ -42,7 +43,7 @@ jobs:
               nohup (java -jar /home/ubuntu/api/deploy-openpix/openpix/target/openpix-0.0.1-SNAPSHOT.jar > logs.txt &&)
               echo "Aplicação em execução"    
       - name: listing process
-        uses: appleboy/ssh-action@v0.1.7
+        uses: appleboy/ssh-action@v0.1.7        
         with:
             host: 177.93.128.55
             username: ubuntu
