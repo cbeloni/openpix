@@ -10,7 +10,7 @@ jobs:
     environment:
       name: open-pix
     steps:
-      - name: building
+      - name: building app
         uses: appleboy/ssh-action@v0.1.7
         with:
           host: 177.93.128.55
@@ -29,7 +29,7 @@ jobs:
             ./mvnw package -DskipTests
             cd ..               
             chmod +x openpix/target/openpix-0.0.1-SNAPSHOT.jar                        
-      - name: deploying
+      - name: deploying app
         uses: appleboy/ssh-action@v0.1.7
         with:
             host: 177.93.128.55
