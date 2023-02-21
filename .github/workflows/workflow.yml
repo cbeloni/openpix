@@ -11,4 +11,4 @@ jobs:
      - name: Run Remote Script
        run: ssh ubuntu@177.93.128.55 /home/ubuntu/api/deploy-openpix/start-server.sh
        env: 
-         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+         SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
