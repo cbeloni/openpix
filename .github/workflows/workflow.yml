@@ -7,6 +7,8 @@ on:
 jobs:
   meu-job:
     runs-on: ubuntu-latest
+    environment:
+      name: open-pix
     steps:
      - name: Run Remote Script
        run: ssh ubuntu@177.93.128.55 /home/ubuntu/api/deploy-openpix/start-server.sh
