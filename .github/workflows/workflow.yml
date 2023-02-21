@@ -22,7 +22,7 @@ jobs:
           script: | 
             cd /home/ubuntu/api/deploy-openpix/
             [ -d openpix ] && rm -rf openpix
-            git clone https://${{ secrets.GIT_USER }}:${{ secrets.GIT_TOKEN} }@github.com/cbeloni/openpix.git
+            git clone https://${{ secrets.GIT_USER }}:${{ secrets.GIT_TOKEN }}@github.com/cbeloni/openpix.git
             cd openpix 
             chmod +x mvnw
             ./mvnw package
