@@ -20,5 +20,5 @@ jobs:
           command_timeout: 1m
           script: | 
             cd /home/ubuntu/api/deploy-openpix/
-            ./start-server.sh > log &
-            exit
+            echo "exit 0" >> start-server.sh
+            ./start-server.sh
