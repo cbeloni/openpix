@@ -27,7 +27,7 @@ jobs:
             ./mvnw package -DskipTests
             cd ..               
             chmod +x openpix/target/openpix-0.0.1-SNAPSHOT.jar                        
-      - name: deploying app
+      - name: starting app
         uses: appleboy/ssh-action@v0.1.7
         with:
             host: 177.93.128.55
@@ -37,15 +37,4 @@ jobs:
             command_timeout: 1m
             script: | 
               sudo systemctl restart openpix
-              echo "Aplicação em execução"    
-      - name: listing process
-        uses: appleboy/ssh-action@v0.1.7        
-        with:
-            host: 177.93.128.55
-            username: ubuntu
-            key: ${{ secrets.SSH_PRIVATE_KEY }}
-            port: 22
-            command_timeout: 1m
-            script: |       
-              PIDS=$(jps | grep openpix-0.0.1-SNAPSHOT.jar | awk '{print $1}')
-              for pid in $PIDS; do echo "Processo $pid iniciado com sucesso! "; done;              
+              echo "Aplicação em execução"              
