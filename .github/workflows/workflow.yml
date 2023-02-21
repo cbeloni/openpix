@@ -29,8 +29,7 @@ jobs:
             cd ..
             PIDS=$(ps -ef | grep openpix-0.0.1-SNAPSHOT.jar | awk '{print $2}')
             echo "Matando processo com os PIDs $PIDS"
-            echo $PIDS | tr ' ' '\n' | xargs sudo kill
-            echo "Iniciando aplicação..."
+            for pid in $PIDS; do echo "Matando processo com PID $pid"; sudo kill $pid; done
             chmod +x openpix/target/openpix-0.0.1-SNAPSHOT.jar
             sudo java -jar -Dserver.port=80 openpix/target/openpix-0.0.1-SNAPSHOT.jar > logs.txt &
             echo "Aplicação iniciada com sucesso"
