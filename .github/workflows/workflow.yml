@@ -11,7 +11,7 @@ jobs:
       name: open-pix
     steps:
       - name: executing remote ssh commands using ssh key
-        uses: actions/checkout@v1
+        uses: appleboy/ssh-action@v0.1.7
         with:
           host: 177.93.128.55
           username: ubuntu
