@@ -29,9 +29,8 @@ jobs:
             ./mvnw package -DskipTests
             cd ..               
             chmod +x openpix/target/openpix-0.0.1-SNAPSHOT.jar            
-            #for pid in $PIDS; do echo "Matando processo com PID $pid"; done;
-            #for pid in $PIDS; do sudo kill -9 $pid & done;
-            java -jar openpix/target/openpix-0.0.1-SNAPSHOT.jar > logs.txt &        
+            for pid in $PIDS; do echo "Matando processo com PID $pid"; done;
+            for pid in $PIDS; do sudo kill -9 $pid & done;      
             echo "Aplicação iniciada com sucesso"
             exit 0
             true
