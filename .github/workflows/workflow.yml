@@ -18,8 +18,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           command_timeout: 2m
-          script: |        
-            PIDS=$(jps | grep openpix-0.0.1-SNAPSHOT.jar | awk '{print $1}')
+          script: |                    
             cd /home/ubuntu/api/deploy-openpix/
             [ -d openpix ] && rm -rf openpix
             git clone https://${{ secrets.GIT_USER }}:${{ secrets.GIT_TOKEN }}@github.com/cbeloni/openpix.git
@@ -36,10 +35,20 @@ jobs:
             key: ${{ secrets.SSH_PRIVATE_KEY }}
             port: 22
             command_timeout: 1m
-            script: |        
+            script: | 
+              PIDS=$(jps | grep openpix-0.0.1-SNAPSHOT.jar | awk '{print $1}')
               for pid in $PIDS; do echo "Matando processo com PID $pid"; done;
               for pid in $PIDS; do sudo kill -9 $pid & done;  
-              java -jar /home/ubuntu/api/deploy-openpix/openpix/target/openpix-0.0.1-SNAPSHOT.jar &&&
-              echo "Aplicação iniciada com sucesso"
-              exit 0
-              true           
+              java -jar /home/ubuntu/api/deploy-openpix/openpix/target/openpix-0.0.1-SNAPSHOT.jar &&
+              echo "Aplicação em execução"    
+      - name: listing initilized process
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+            host: 177.93.128.55
+            username: ubuntu
+            key: ${{ secrets.SSH_PRIVATE_KEY }}
+            port: 22
+            command_timeout: 1m
+            script: |       
+              PIDS=$(jps | grep openpix-0.0.1-SNAPSHOT.jar | awk '{print $1}')
+              for pid in $PIDS; do echo "Processo $pid iniciado com sucesso! "; done;              
