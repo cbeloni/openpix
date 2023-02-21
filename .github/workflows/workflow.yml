@@ -10,7 +10,7 @@ jobs:
     environment:
       name: open-pix
     steps:
-      - name: executing remote ssh commands using ssh key
+      - name: building
         uses: appleboy/ssh-action@v0.1.7
         with:
           host: 177.93.128.55
@@ -28,10 +28,19 @@ jobs:
             chmod +x mvnw
             ./mvnw package -DskipTests
             cd ..               
-            chmod +x openpix/target/openpix-0.0.1-SNAPSHOT.jar            
-            for pid in $PIDS; do echo "Matando processo com PID $pid"; done;
-            for pid in $PIDS; do sudo kill -9 $pid & done;  
-            nohup java -jar openpix/target/openpix-0.0.1-SNAPSHOT.jar > logs.txt &&
-            echo "Aplicação iniciada com sucesso"
-            exit 0
-            true
+            chmod +x openpix/target/openpix-0.0.1-SNAPSHOT.jar                        
+      - name: run
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+            host: 177.93.128.55
+            username: ubuntu
+            key: ${{ secrets.SSH_PRIVATE_KEY }}
+            port: 22
+            command_timeout: 2m
+            script: |        
+              for pid in $PIDS; do echo "Matando processo com PID $pid"; done;
+              for pid in $PIDS; do sudo kill -9 $pid & done;  
+              nohup java -jar openpix/target/openpix-0.0.1-SNAPSHOT.jar & > logs.txt &&
+              echo "Aplicação iniciada com sucesso"
+              exit 0
+              true           
