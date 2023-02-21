@@ -5,12 +5,16 @@ on:
     branches: [ main ]
 
 jobs:
-  meu-job:
+  remote-ssh:
     runs-on: ubuntu-latest
     environment:
       name: open-pix
     steps:
-     - name: Run Remote Script
-       run: ssh -i $SSH_PRIVATE_KEY ubuntu@177.93.128.55 /home/ubuntu/api/deploy-openpix/start-server.sh
-       env: 
-         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: 177.93.128.55
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: /home/ubuntu/api/deploy-openpix/start-server.sh
